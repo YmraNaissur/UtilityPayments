@@ -6,9 +6,9 @@ package ru.naissur.payments.model;
  */
 public class Payment {
     private final PaymentType type; // тип
-    private final int amount;   // размер в рублях
+    private final double amount;   // размер в рублях
 
-    public Payment(PaymentType type, int amount) {
+    public Payment(PaymentType type, double amount) {
         this.type = type;
         this.amount = amount;
     }
@@ -17,7 +17,7 @@ public class Payment {
         return type;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 }
