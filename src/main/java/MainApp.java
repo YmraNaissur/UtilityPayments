@@ -17,8 +17,10 @@ public class MainApp {
         monthlyPayments.add(new Payment(PaymentType.UTILITY, 3256.75, LocalDate.of(2017, 4, 20)));
         monthlyPayments.add(new Payment(PaymentType.RENEWAL, 189.91, LocalDate.of(2017, 4, 10)));
 
-        monthlyPayments.forEach(p -> System.out.printf("Тип: %s, сумма: %.2f, оплатить до %s%n",
-                getTypeInLowerCase(p.getType().toString()), p.getAmount(), p.getDueDate()));
+        monthlyPayments.get(1).pay();
+
+        monthlyPayments.forEach(p -> System.out.printf("Тип: %s, сумма: %.2f, оплатить до %s, оплачено = %b%n",
+                getTypeInLowerCase(p.getType().toString()), p.getAmount(), p.getDueDate(), p.isPayed()));
     }
 
     private static String getTypeInLowerCase(String type) {

@@ -10,8 +10,7 @@ public class Payment {
     private final PaymentType type; // тип
     private final double amount;   // размер в рублях
     private final LocalDate dueDate; // до какой даты следует оплатить
-
-    private boolean payed; // оплачено ли?
+    private boolean payed = false; // оплачено ли?
 
 
     public Payment(PaymentType type, double amount, LocalDate dueDate) {
@@ -32,11 +31,19 @@ public class Payment {
         return dueDate;
     }
 
+    /**
+     * Проверяем, заплатили ли мы уже по этому счету
+     * @return true если заплатили, false если не заплатили
+     */
     public boolean isPayed() {
         return payed;
     }
 
-    public void setPayed(boolean payed) {
-        this.payed = payed;
+    /**
+     * Заплатить по счету. Операция необратима,
+     * поэтому нет публичного сеттера setPayed()
+     */
+    public void pay() {
+        this.payed = true;
     }
 }
