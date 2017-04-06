@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * naissur
  * 03.04.2017
  */
-public class Payment {
+public class Payment extends BaseEntity {
     private final PaymentType type; // тип
     private final double amount;   // размер в рублях
     private final LocalDate dueDate; // до какой даты следует оплатить
