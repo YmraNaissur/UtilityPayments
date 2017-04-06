@@ -1,8 +1,7 @@
 import ru.naissur.payments.model.Payment;
-import ru.naissur.payments.model.PaymentType;
+import ru.naissur.payments.repository.PaymentRepository;
+import ru.naissur.payments.repository.mock.InMemoryPaymentRepository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,13 +10,8 @@ import java.util.List;
  */
 public class MainApp {
     public static void main(String[] args) {
-        List<Payment> monthlyPayments = new ArrayList<>();
-        monthlyPayments.add(new Payment(PaymentType.RENTAL, 9000, LocalDate.of(2017, 4, 10)));
-        monthlyPayments.add(new Payment(PaymentType.ELECTRICITY, 286, LocalDate.of(2017, 4, 30)));
-        monthlyPayments.add(new Payment(PaymentType.UTILITY, 3256.75, LocalDate.of(2017, 4, 20)));
-        monthlyPayments.add(new Payment(PaymentType.RENEWAL, 189.91, LocalDate.of(2017, 4, 10)));
-
-        monthlyPayments.get(1).pay();
+        PaymentRepository repository = new InMemoryPaymentRepository();
+        List<Payment> monthlyPayments = repository.getAll();
 
         monthlyPayments.forEach(p -> System.out.printf("Тип: %s, сумма: %.2f, оплатить до %s, оплачено = %b%n",
                 getTypeInLowerCase(p.getType().toString()), p.getAmount(), p.getDueDate(), p.isPayed()));
