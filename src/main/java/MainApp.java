@@ -1,6 +1,7 @@
 import ru.naissur.payments.model.Payment;
 import ru.naissur.payments.repository.PaymentRepository;
 import ru.naissur.payments.repository.mock.InMemoryPaymentRepository;
+import ru.naissur.payments.util.PaymentUtil;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class MainApp {
 
         monthlyPayments.forEach(p -> System.out.printf("Тип: %s, сумма: %.2f, оплатить до %s, оплачено = %b%n",
                 getTypeInLowerCase(p.getType().toString()), p.getAmount(), p.getDueDate(), p.isPaid()));
+
+        System.out.println("Сумма неоплаченных счетов: " + PaymentUtil.getTotalUnpaidAmount(monthlyPayments));
     }
 
     private static String getTypeInLowerCase(String type) {
