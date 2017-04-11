@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="payments" type="java.util.List" scope="request"/>
+<jsp:useBean id="payments" type="java.util.List" scope="request" />
+<jsp:useBean id="totalUnpaidAmount" type="java.lang.Double" scope="request" />
 
 <html>
     <head>
-        <title>UtilityPayments</title>
+        <title>Коммунальные платежи</title>
         <style>
             th {
                 font-weight: bold;
@@ -20,7 +21,7 @@
         </style>
     </head>
     <body>
-        <h1>Utility Payments</h1>
+        <h1 style="padding-left: 8px">Коммунальные платежи</h1>
 
         <table border="1" cellpadding="8">
             <tr>
@@ -35,9 +36,14 @@
                     <td>${payment.type.toString()}</td>
                     <td>${payment.amount}</td>
                     <td>${payment.dueDate}</td>
+                    <td>${payment.paid ? '<a href="http://ya.ru">Оплатить</a>' : ''}</td>
                 </tr>
             </c:forEach>
 
+            <tr>
+                <td colspan="2" style="text-align: right"><strong>Сумма неоплаченных счетов, руб:</strong></td>
+                <td>${totalUnpaidAmount}</td>
+            </tr>
         </table>
     </body>
 </html>

@@ -1,12 +1,15 @@
 package ru.naissur.payments.web;
 
+import ru.naissur.payments.model.Payment;
 import ru.naissur.payments.repository.PaymentRepository;
 import ru.naissur.payments.repository.mock.InMemoryPaymentRepository;
+import ru.naissur.payments.util.PaymentUtil;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * naissur
@@ -23,7 +26,9 @@ public class UtilityPaymentsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("payments", repository.getAll());
+        List<Payment> paymentList = repository.getAll();
+        req.setAttribute("payments", paymentList);
+        req.setAttribute("totalUnpaidAmount", PaymentUtil.getTotalUnpaidAmount(paymentList));
         req.getRequestDispatcher("/payments.jsp").forward(req, resp);
     }
 }
