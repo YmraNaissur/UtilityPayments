@@ -21,6 +21,7 @@ public class InMemoryPaymentRepository implements PaymentRepository {
     {
         save(new Payment(PaymentType.RENTAL, 9000, LocalDate.of(2017, 4, 10)));
         save(new Payment(PaymentType.ELECTRICITY, 286, LocalDate.of(2017, 4, 30)));
+        repository.get(2).pay();
         save(new Payment(PaymentType.UTILITY, 3256.75, LocalDate.of(2017, 4, 20)));
         save(new Payment(PaymentType.RENEWAL, 189.91, LocalDate.of(2017, 4, 10)));
     }
