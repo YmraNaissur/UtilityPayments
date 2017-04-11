@@ -5,13 +5,39 @@
 <html>
     <head>
         <title>UtilityPayments</title>
+        <style>
+            th {
+                font-weight: bold;
+                text-align: left;
+            }
+
+            .paid {
+                color: green;
+            }
+            .unpaid {
+                color: red;
+            }
+        </style>
     </head>
     <body>
         <h1>Utility Payments</h1>
 
-        <c:forEach items="${payments}" var="payment">
-            <jsp:useBean id="payment" type="ru.naissur.payments.model.Payment" scope="page" />
-            <br>${payment.type}
-        </c:forEach>
+        <table border="1" cellpadding="8">
+            <tr>
+                <th>Тип платежа</th>
+                <th>Размер платежа, руб</th>
+                <th>Оплатить до</th>
+            </tr>
+
+            <c:forEach items="${payments}" var="payment">
+                <tr class="${payment.paid ? 'paid' : 'unpaid'}">
+                    <jsp:useBean id="payment" type="ru.naissur.payments.model.Payment" scope="page"/>
+                    <td>${payment.type.toString()}</td>
+                    <td>${payment.amount}</td>
+                    <td>${payment.dueDate}</td>
+                </tr>
+            </c:forEach>
+
+        </table>
     </body>
 </html>
