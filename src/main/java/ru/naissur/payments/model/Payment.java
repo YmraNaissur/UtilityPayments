@@ -10,7 +10,7 @@ public class Payment extends BaseEntity {
     private final PaymentType type; // тип
     private final double amount;   // размер в рублях
     private final LocalDate dueDate; // до какой даты следует оплатить
-    private boolean payed = false; // оплачено ли?
+    private boolean paid = false; // оплачено ли?
 
 
     public Payment(PaymentType type, double amount, LocalDate dueDate) {
@@ -35,8 +35,8 @@ public class Payment extends BaseEntity {
      * Проверяем, заплатили ли мы уже по этому счету
      * @return true если заплатили, false если не заплатили
      */
-    public boolean isPayed() {
-        return payed;
+    public boolean isPaid() {
+        return paid;
     }
 
     /**
@@ -44,6 +44,6 @@ public class Payment extends BaseEntity {
      * поэтому нет публичного сеттера setPayed()
      */
     public void pay() {
-        this.payed = true;
+        this.paid = true;
     }
 }

@@ -14,7 +14,7 @@ public class MainApp {
         List<Payment> monthlyPayments = repository.getAll();
 
         monthlyPayments.forEach(p -> System.out.printf("Тип: %s, сумма: %.2f, оплатить до %s, оплачено = %b%n",
-                getTypeInLowerCase(p.getType().toString()), p.getAmount(), p.getDueDate(), p.isPayed()));
+                getTypeInLowerCase(p.getType().toString()), p.getAmount(), p.getDueDate(), p.isPaid()));
     }
 
     private static String getTypeInLowerCase(String type) {
