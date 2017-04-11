@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class PaymentUtil {
     /**
-     * Рассчет полной стоимости неоплаченных счетов
+     * Расчет полной стоимости неоплаченных счетов
      * @param paymentList список со счетами
      * @return стоимость неоплаченных счетов из списка paymentList
      */
