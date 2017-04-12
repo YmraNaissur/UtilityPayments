@@ -36,7 +36,11 @@
                     <td>${payment.type.toString()}</td>
                     <td>${payment.amount}</td>
                     <td>${payment.dueDate}</td>
-                    <td>${payment.paid ? '<a href="http://ya.ru">Оплатить</a>' : ''}</td>
+                    <td>
+                        <c:if test="${!payment.paid}">
+                            <a href="<c:out value="/payments?action=pay&id=${payment.id}" />">Оплатить</a>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
 
