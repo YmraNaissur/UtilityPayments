@@ -26,9 +26,21 @@ public class UtilityPaymentsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Payment> paymentList = repository.getAll();
-        req.setAttribute("payments", paymentList);
-        req.setAttribute("totalUnpaidAmount", PaymentUtil.getTotalUnpaidAmount(paymentList));
-        req.getRequestDispatcher("/payments.jsp").forward(req, resp);
+        // будем проверять, чему равен параметр action. Если он null, то просто показываем весь список
+        String action = req.getParameter("action");
+
+        switch (action == null ? "all" : action) {
+            case "pay":
+                int id = Integer.parseInt(req.getParameter("id"));
+                repository.get(id).pay();
+                resp.sendRedirect("payments");
+                break;
+            case "all":
+                // извлечем список платежей из репозитория
+                List<Payment> paymentList = repository.getAll();
+                req.setAttribute("payments", paymentList);
+                req.setAttribute("totalUnpaidAmount", PaymentUtil.getTotalUnpaidAmount(paymentList));
+                req.getRequestDispatcher("/payments.jsp").forward(req, resp);
+        }
     }
 }
