@@ -41,6 +41,7 @@
                             <a href="<c:out value="/payments?action=pay&id=${payment.id}" />">Оплатить</a>
                         </c:if>
                     </td>
+                    <td><a href="<c:out value="/payments?action=delete&id=${payment.id}" />">Удалить</a></td>
                 </tr>
             </c:forEach>
 
