@@ -44,4 +44,14 @@ public class InMemoryPaymentRepository implements PaymentRepository {
     public List<Payment> getAll() {
         return repository.values().stream().collect(Collectors.toList());
     }
+
+    @Override
+    public boolean delete(int id) {
+        if (repository.containsKey(id)) {
+            repository.remove(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

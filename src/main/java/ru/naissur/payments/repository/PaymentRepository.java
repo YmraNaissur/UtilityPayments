@@ -22,4 +22,11 @@ public interface PaymentRepository {
      * @return список всех платежей, которые есть в хранилище
      */
     List<Payment> getAll();
+
+    /**
+     * Удаляем платеж
+     * @param id ИД платежа, который хотим удалить
+     * @return true, если платеж найден и удален успешно; в противном случае - false
+     */
+    boolean delete(int id);
 }
