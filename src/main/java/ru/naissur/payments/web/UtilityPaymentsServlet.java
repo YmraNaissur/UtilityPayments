@@ -31,8 +31,11 @@ public class UtilityPaymentsServlet extends HttpServlet {
 
         switch (action == null ? "all" : action) {
             case "pay":
-                int id = Integer.parseInt(req.getParameter("id"));
-                repository.get(id).pay();
+                repository.get(getId(req)).pay();
+                resp.sendRedirect("payments");
+                break;
+            case "delete":
+                repository.delete(getId(req));
                 resp.sendRedirect("payments");
                 break;
             case "all":
@@ -42,5 +45,10 @@ public class UtilityPaymentsServlet extends HttpServlet {
                 req.setAttribute("totalUnpaidAmount", PaymentUtil.getTotalUnpaidAmount(paymentList));
                 req.getRequestDispatcher("/payments.jsp").forward(req, resp);
         }
+    }
+
+    // получаем id платежа, чтобы не писать постоянно Integer.parseInt(req.getParameter("id"))
+    private int getId(HttpServletRequest req) {
+        return Integer.parseInt(req.getParameter("id"));
     }
 }
