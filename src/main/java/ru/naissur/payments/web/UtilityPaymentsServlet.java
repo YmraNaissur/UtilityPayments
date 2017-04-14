@@ -1,6 +1,7 @@
 package ru.naissur.payments.web;
 
 import ru.naissur.payments.model.Payment;
+import ru.naissur.payments.model.PaymentType;
 import ru.naissur.payments.repository.PaymentRepository;
 import ru.naissur.payments.repository.mock.InMemoryPaymentRepository;
 import ru.naissur.payments.util.PaymentUtil;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -38,6 +40,13 @@ public class UtilityPaymentsServlet extends HttpServlet {
                 repository.delete(getId(req));
                 resp.sendRedirect("payments");
                 break;
+            case "add":
+                final Payment payment = (action != null && action.equals("add") ?
+                    new Payment(PaymentType.RENTAL, 9000, LocalDate.now()) :
+                    repository.get(getId(req)));
+                req.setAttribute("payment", payment);
+                req.getRequestDispatcher("/payment.jsp").forward(req, resp);
+                break;
             case "all":
                 // извлечем список платежей из репозитория
                 List<Payment> paymentList = repository.getAll();
@@ -45,6 +54,18 @@ public class UtilityPaymentsServlet extends HttpServlet {
                 req.setAttribute("totalUnpaidAmount", PaymentUtil.getTotalUnpaidAmount(paymentList));
                 req.getRequestDispatcher("/payments.jsp").forward(req, resp);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String id = req.getParameter("id");
+
+        Payment payment = new Payment (PaymentType.getTypeFromString(req.getParameter("type")),
+                Double.parseDouble(req.getParameter("amount")),
+                LocalDate.parse(req.getParameter("dueDate")));
+        repository.save(payment);
+        resp.sendRedirect("payments");
     }
 
     // получаем id платежа, чтобы не писать постоянно Integer.parseInt(req.getParameter("id"))

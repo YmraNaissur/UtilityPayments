@@ -11,6 +11,26 @@ public enum PaymentType {
     ELECTRICITY, // электричество
     RENEWAL; // капитальный ремонт
 
+    /**
+     * Получим тип платежа по строке из выпадающего списка
+     * @param str строка, из которой нужно получить тип
+     * @return тип платежа по переданной строке
+     */
+    public static PaymentType getTypeFromString(String str) {
+        switch (str) {
+            case "Арендная плата":
+                return RENTAL;
+            case "Коммунальные услуги":
+                return UTILITY;
+            case "Электричество":
+                return ELECTRICITY;
+            case "Капитальный ремонт":
+                return RENEWAL;
+            default:
+                return null;
+        }
+    }
+
     /*
      *  Вернем человеческое наименование вида платежа
      *  в зависимости от значения PaymentType

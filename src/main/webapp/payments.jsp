@@ -30,6 +30,11 @@
                 <th>Оплатить до</th>
             </tr>
 
+            <a href="payments?action=add">Добавить новый платеж</a>
+
+            <hr>
+            <br />
+
             <c:forEach items="${payments}" var="payment">
                 <tr class="${payment.paid ? 'paid' : 'unpaid'}">
                     <jsp:useBean id="payment" type="ru.naissur.payments.model.Payment" scope="page"/>
