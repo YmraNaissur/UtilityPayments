@@ -13,7 +13,14 @@
             <input type="hidden" name="id" value="${payment.id}">
             <dl>
                 <dt>Тип платежа:</dt>
-                <dd><input type="text" value="${payment.type.toString()}" size=40 name="type"></dd>
+                <dd>
+                    <select name="type">
+                        <option selected>Арендная плата</option>
+                        <option>Коммунальные услуги</option>
+                        <option>Электричество</option>
+                        <option>Капитальный ремонт</option>
+                    </select>
+                </dd>
             </dl>
 
             <dl>
